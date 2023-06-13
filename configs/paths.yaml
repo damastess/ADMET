@@ -1,0 +1,4 @@
+bundled_fp_dir: 'data/fingerprints'
+separate_fps_dir: 'data/fingerprints/separate_fingerprints'
+proteins_dir: 'data/proteins'
+ligands_dir: 'data/ligands'
