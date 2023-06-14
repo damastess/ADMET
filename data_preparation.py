@@ -42,6 +42,18 @@ def prepare_df(target):
     return new_df
 
 
+def extract_count_by_interaction_type(df):
+    column_names = df.columns
+    third_position_names = set([col[2] for col in column_names if isinstance(col, tuple) and len(col) == 3 and col[2] != ''])
+    interaction_types_list = list(third_position_names)
+    new_df = df[['pIC50']]
+    for interaction in interaction_types_list:
+        selected_columns = [col for col in df.columns if isinstance(col, tuple) and len(col) >= 3 and col[2] == 'Hydrophobic']
+        df_selected = df[selected_columns]
+        new_df[interaction] = df_selected.sum(axis=1).astype(float)
+    return new_df
+
+
 def prepare_np_xy(df):
     columns = df.columns[:-5].tolist() + [df.columns[-1]]
     df_sel = df[columns]
@@ -49,6 +61,20 @@ def prepare_np_xy(df):
     X = np_arr[:, :-1]
     y = np_arr[:, -1]
     return X, y
+
+
+def prepare_np_xy_count_by_interaction_type(df):
+    X = df.to_numpy()[:, 1:]
+    y = df.to_numpy()[:, 0]
+    return X, y
+
+
+def prepare_np_xy_types_and_all_interactions(df):
+    df_type = extract_count_by_interaction_type(df)
+    X1, y1 = prepare_np_xy_count_by_interaction_type(df_type)
+    X2, y2 = prepare_np_xy(df)
+    Xc = np.concatenate([X1, X2], axis=1)
+    return Xc, y1
 
 
 def get_kfold_split(X, y, k):
