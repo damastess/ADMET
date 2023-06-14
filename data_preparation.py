@@ -25,22 +25,13 @@ def prepare_df(target):
     chembl_ids = [str.split('_')[2] for str in separate_fp_files_list]
     df_bundled['chembl_id'] = chembl_ids
 
-    if(target == 'herg'):
-        data_path = "herg_ic50.csv"
-        protein_path = "7cn1_hERG.pdb"
-    elif(target == 'cyp3a4'):
-        data_path = "cyp3a4_ic50.csv"
-        protein_path = "1w0g_CYP3A4.pdb"
-    elif(target == 'cyp2d6'):
-        data_path = "cyp2d6_ic50.csv"
-        protein_path = "3qm4_CYP2D6.pdb"
-    elif(target == 'cyp2d6_new'):
-        data_path = "cyp2d6_ic50.csv"
-        protein_path = "cyp2d6_nowy01_4wnw.pdb"
-    else:
-        pass
+    with open('configs/docking.yaml', "r") as f:
+        config2 = yaml.safe_load(f)[target]
 
-    df = pd.read_csv(ligands_dir + '/' + data_path, sep=';')
+    data_path = config2['data_path'][1:]
+    protein_path = config2['protein_path'][1:]
+
+    df = pd.read_csv(data_path, sep=';')
     df_pr = df[['Molecule ChEMBL ID', 'Smiles', 'Standard Value']].dropna().groupby(['Molecule ChEMBL ID', 'Smiles'], as_index=False).mean().copy()
 
     second_df = df_pr[df_pr['Molecule ChEMBL ID'].isin(chembl_ids)].reset_index(drop=True)
