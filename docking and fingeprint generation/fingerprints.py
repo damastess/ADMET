@@ -12,14 +12,10 @@ import prolif as plf
 
 def generate_fingerprints(target, start_idx, mol_count):
 
-    if target == 'herg':
-        target_pdb = '../data/proteins/7cn1_hERG.pdb'
-    elif target == 'cyp3a4':
-        target_pdb = '../data/proteins/1w0g_CYP3A4.pdb'
-    elif target == 'cyp2d6':
-        target_pdb = '../data/proteins/3qm4_CYP2D6.pdb'
-    elif target == 'cyp2d6_new':
-        target_pdb = '../data/proteins/cyp2d6_nowy01_4wnw.pdb'
+    if target == 'herg': target_pdb = '../data/proteins/7cn1_hERG.pdb'
+    elif target == 'cyp3a4': target_pdb = '../data/proteins/1w0g_CYP3A4.pdb'
+    elif target == 'cyp2d6': target_pdb = '../data/proteins/3qm4_CYP2D6.pdb'
+    elif target == 'cyp2d6_new': target_pdb = '../data/proteins/cyp2d6_nowy01_4wnw.pdb'
 
     docked_dir = 'docked'
 
@@ -30,8 +26,8 @@ def generate_fingerprints(target, start_idx, mol_count):
     err_num = 0
 
     for file_name in list[start_idx:mol_count]:
-        try:
 
+        try:
             with open(docked_dir + '/' + target +'/' + file_name, 'r') as file:
                 mol_blocks = ['@<TRIPOS>MOLECULE'+block for block in file.read().split('@<TRIPOS>MOLECULE')][1:]
                 mol = Chem.MolFromMol2Block(mol_blocks[0])

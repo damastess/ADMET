@@ -1,0 +1,36 @@
+herg: {
+  data_path: "../data/ligands/herg_ic50.csv",
+  protein_path: "../data/proteins/7cn1_hERG.pdb",
+  centers: {
+    x: "141.475",
+    y: "141.38225",
+    z: "166.96675",
+  }
+}
+cyp3a4: {
+  data_path: "../data/ligands/cyp3a4_ic50.csv",
+  protein_path: "../data/proteins/1w0g_CYP3A4.pdb",
+  centers: {
+    x: "58.633",
+    y: "81.856",
+    z: "7.439",
+  }
+}
+cyp2d6: {
+  data_path: "../data/ligands/cyp2d6_ic50.csv",
+  protein_path: "../data/proteins/3qm4_CYP2D6.pdb",
+  centers: {
+    x: "5.464",
+    y: "-7.289",
+    z: "30.982",
+  }
+}
+cyp2d6_new: {
+  data_path: "../data/ligands/cyp2d6_ic50.csv",
+  protein_path: "../data/proteins/cyp2d6_nowy01_4wnw.pdb",
+  centers: {
+    x: "4.664",
+    y: "-6.289",
+    z: "33.282",
+  }
+}
