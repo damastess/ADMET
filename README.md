@@ -13,6 +13,8 @@ In order to obtain interaction fingerprints which serve as input to our machine 
 
 Molecular docking is the process of finding the optimal position of the ligand in the protein's binding pocket by optimizing the energy function.
 
+![Image](https://github.com/damastess/structure-based-ADMET-prediction/blob/master/docked_pic.png?raw=true)
+
 In the next step we generated interaction fingerprint using ProLIF package. This way we obtain binary vectors describing the types of interactions between the atoms of the ligand and the amino acids of the protein.
 
 ## Code
